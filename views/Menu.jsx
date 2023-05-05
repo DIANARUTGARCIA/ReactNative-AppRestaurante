@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import {Text, View} from 'react-native';
 
 const Menu = () => {
   return (
-    <div>Menu</div>
-  )
-}
+    <View>
+      <Text>jbjbhbj</Text>
+    </View>
+  );
+};
 
-export default Menu
+export default Menu;
