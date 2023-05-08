@@ -16,7 +16,9 @@ const FirebaseState = props => {
   const obtenerProductos = () => {
 
     //CONSULTAR FIREBASE
-    firebase.db.settings({ experimentalForceLongPolling: true });
+    //  firebase.db.settings({ experimentalForceLongPolling: true });
+
+     firebase.db.settings({experimentalForceLongPolling: true, merge: true });
     firebase.db
       .collection('productos')
       .where('existencia', '==', true)
