@@ -1,9 +1,8 @@
-import React from 'react'
+import React from 'react';
+import {Text} from 'native-base';
 
 const FormularioPlatillo = () => {
-  return (
-    <div>FormularioPlatillo</div>
-  )
-}
+  return <Text>FormularioPlatillo</Text>;
+};
 
-export default FormularioPlatillo
+export default FormularioPlatillo;
