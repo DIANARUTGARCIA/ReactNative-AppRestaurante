@@ -17,6 +17,17 @@ const globalStyles = StyleSheet.create({
     marginHorizontal:'2.5%',
     flex:1,
   },
+  titulo:{
+   textAlign:'center',
+   marginTop:40,
+   paddingLeft:30,
+   marginBottom:20,
+   fontSize:30,
+  },
+  imagen:{
+    height:300,
+    width:'100%',
+  },
 });
 
 export default globalStyles;

@@ -3,6 +3,7 @@ import firebase from '../../firebase';
 import FirebaseReducer from './firebaseReducer';
 import FirebaseContext from './firebaseContext';
 import {OBTENER_PRODUCTOS} from '../../types';
+import _ from 'lodash';
 
 const FirebaseState = props => {
   //state inicial
@@ -14,24 +15,35 @@ const FirebaseState = props => {
   //funcion para traer los productos
 
   const obtenerProductos = () => {
-
     //CONSULTAR FIREBASE
     //  firebase.db.settings({ experimentalForceLongPolling: true });
 
-     firebase.db.settings({experimentalForceLongPolling: true, merge: true });
+    firebase.db.settings({experimentalForceLongPolling: true, merge: true});
     firebase.db
       .collection('productos')
       .where('existencia', '==', true)
       .onSnapshot(manejarSnapshot);
 
     function manejarSnapshot(snapshot) {
-      let platillos = snapshot.docs.map(doc => {
-        return {
-          id: doc.id,
-          ...doc.data(),
-        };
-      });
-      console.log(platillos);
+      let platillos = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
+      // let platillos = snapshot.docs.map(doc => {
+      //   return {
+      //     id: doc.id,
+      //     ...doc.data(),
+      //   };
+      // });
+      //ordenar por categoria
+
+      platillos = Array.from(
+        platillos.reduce(
+          (m, {categoria, ...data}) =>
+            m.set(categoria, [...(m.get(categoria) || []), data]),
+          new Map(),
+        ),
+        ([categoria, data]) => ({categoria, data}),
+      );
+      // platillos = _.sortBy(platillos,'categoria')
+
       dispatch({
         type: OBTENER_PRODUCTOS,
         payload: platillos,
