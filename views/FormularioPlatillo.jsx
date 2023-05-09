@@ -1,8 +1,30 @@
 import React from 'react';
-import {Text} from 'native-base';
+import {NativeBaseProvider, Text,Box, FormControl, HStack,Button,Icon,Heading,Input} from 'native-base';
 
 const FormularioPlatillo = () => {
-  return <Text>FormularioPlatillo</Text>;
+  return (
+    <NativeBaseProvider>
+      <Box>
+        <FormControl>
+          <Heading>Cantidad</Heading>
+          <HStack justifyContent={"space-around"}>
+            <Button>
+              +
+            </Button>
+            <Input/>
+
+            <Button>
+              -
+            </Button>
+
+          </HStack>
+
+        </FormControl>
+
+      </Box>
+      <Text>FormularioPlatillo</Text>;
+    </NativeBaseProvider>
+  );
 };
 
 export default FormularioPlatillo;
