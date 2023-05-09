@@ -13,14 +13,14 @@ const DetallePlatillo = () => {
   const navigation = useNavigation();
   return (
     <NativeBaseProvider style={globalStyles.contenedor}>
-      <Box style={globalStyles.contenido}>
+      <View style={globalStyles.contenido}>
         <Text style={globalStyles.titulo}>{nombre} </Text>
         <Box  border="1" borderRadius="md">
           <Image style={globalStyles.imagen} source={{uri: imagen}} />
           <Text style={{marginTop: 20}}>{descripcion} </Text>
           <Text style={globalStyles.cantidad}>Precio: $ {precio} </Text>
         </Box>
-      </Box>
+      </View>
       <View>
         <Button
          style={globalStyles.boton}
