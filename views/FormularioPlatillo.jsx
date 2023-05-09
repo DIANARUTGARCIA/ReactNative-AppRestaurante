@@ -15,16 +15,26 @@ import globalStyles from '../styles/global';
 
 const FormularioPlatillo = () => {
   const [cantidad, setCantidad] = useState('1');
-  //funcion para almacenar la cantidad
-  const calcularCantidad=(cantidad)=>{
+  //incrementa en 1 el boton
+  const incrementar = () => {
+    const nuevaCantidad = parseInt(cantidad) + 1;
+    setCantidad(nuevaCantidad.toString());
+  };
+  //decrementar la cantidad
+  const decrementar = () => {
+    if (cantidad > 1) {
+      const nuevaCantidad = parseInt(cantidad) - 1;
+      setCantidad(nuevaCantidad.toString());
+    }
+  };
 
-  }
   return (
     <NativeBaseProvider style={globalStyles.contenedor}>
       <FormControl>
         <Heading style={globalStyles.titulo}>Cantidad</Heading>
         <HStack justifyContent="space-around">
           <Button
+            onPress={() => decrementar()}
             style={{backgroundColor: '#000', justifyContent: 'center'}}
             size={70}
           >
@@ -35,10 +45,14 @@ const FormularioPlatillo = () => {
             w="40%"
             variant="unstyled"
             value={cantidad}
-            keyboardType='numeric'
-            onChangeText={(cantidad)=>setCantidad(cantidad.toString())}
+            keyboardType="numeric"
+            onChangeText={cantidad => setCantidad(cantidad.toString())}
           />
-          <Button style={{backgroundColor: '#000'}} size={70}>
+          <Button
+            onPress={() => incrementar()}
+            style={{backgroundColor: '#000'}}
+            size={70}
+          >
             +
           </Button>
         </HStack>
