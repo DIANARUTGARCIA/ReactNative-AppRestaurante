@@ -45,7 +45,7 @@ const ResumenPedido = () => {
           text: 'Confirmar',
           onPress:  async () => {
             const pedidoObj ={
-              tiempoEntrega:0,
+              tiempoentrega:0,
               completado:false,
               total: Number(total),
               orden: pedido,
@@ -95,7 +95,7 @@ const ResumenPedido = () => {
               <View key={id + i} style={styles.tarjeta}>
                 <HStack  space={[6, 3]}  >
                   <Box>
-                    <Avatar size="115px" source={{uri: imagen}}></Avatar>
+                    <Avatar size="130px" source={{uri: imagen}}></Avatar>
                   </Box>
                   <VStack>
                     <Text>{nombre} </Text>
@@ -107,7 +107,7 @@ const ResumenPedido = () => {
                       style={{backgroundColor: 'red', marginTop: 10}}
                       full
                     >
-                      <Text style={{color: '#fff', paddingHorizontal: 70}}>
+                      <Text style={{color: '#fff', paddingHorizontal: 62}}>
                         Eliminar
                       </Text>
                     </Button>
