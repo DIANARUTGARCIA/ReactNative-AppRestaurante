@@ -16,9 +16,10 @@ import {
 
 import globalStyles from '../styles/global';
 import PedidosContext from '../context/pedidos/pedidosContext';
+import firebase from '../firebase';
 
 const ResumenPedido = () => {
-  const {pedido, total, mostrarResumen,eliminarProducto} = useContext(PedidosContext);
+  const {pedido, total, mostrarResumen,eliminarProducto,pedidoRealizado} = useContext(PedidosContext);
 
   useEffect(() => {
     calcularTotal();
@@ -34,6 +35,7 @@ const ResumenPedido = () => {
   };
   //Funcion para confirmar  y redireccioanr
   const navigation = useNavigation();
+
   const progresoPedido = () => {
     Alert.alert(
       'Revisa tu pedido',
@@ -41,7 +43,20 @@ const ResumenPedido = () => {
       [
         {
           text: 'Confirmar',
-          onPress: () => {
+          onPress:  async () => {
+            const pedidoObj ={
+              tiempoEntrega:0,
+              completado:false,
+              total: Number(total),
+              orden: pedido,
+              creado: Date.now()
+            }
+            try {
+              const pedido = await firebase.db.collection('ordenes').add(pedidoObj)
+               pedidoRealizado(pedido.id);
+            } catch (error) {
+              console.log(error)
+            }
             navigation.navigate('ProgresoPedido');
           },
         },
@@ -114,7 +129,8 @@ const ResumenPedido = () => {
         </View>
       </ScrollView>
       <View>
-        <Button onPress={() => progresoPedido(id)} style={globalStyles.boton}>
+        <Button onPress={() => progresoPedido()} 
+         style={globalStyles.boton}>
           <Text style={globalStyles.botonTexto}>Ordenar Pedido</Text>
         </Button>
       </View>
