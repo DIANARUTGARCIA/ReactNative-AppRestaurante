@@ -13,6 +13,7 @@ const NuevaOrden = () => {
           <Button
             style={globalStyles.boton}
             onPress={() => navigation.navigate('Menu')}
+            borderRadius="full"
           >
             <Text style={globalStyles.botonTexto}>Nueva orden</Text>
           </Button>

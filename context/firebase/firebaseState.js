@@ -16,8 +16,6 @@ const FirebaseState = props => {
 
   const obtenerProductos = () => {
     //CONSULTAR FIREBASE
-    //  firebase.db.settings({ experimentalForceLongPolling: true });
-
     firebase.db.settings({experimentalForceLongPolling: true, merge: true});
     firebase.db
       .collection('productos')
@@ -26,14 +24,6 @@ const FirebaseState = props => {
 
     function manejarSnapshot(snapshot) {
       let platillos = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
-      // let platillos = snapshot.docs.map(doc => {
-      //   return {
-      //     id: doc.id,
-      //     ...doc.data(),
-      //   };
-      // });
-      //ordenar por categoria
-
       platillos = Array.from(
         platillos.reduce(
           (m, {categoria, ...data}) =>

@@ -13,7 +13,7 @@ const globalStyles = StyleSheet.create({
     color: '#000',
   },
   contenido: {
-    marginHorizontal: '2.5%',
+    marginHorizontal: '2.6%',
     flex: 1,
   },
   titulo: {
