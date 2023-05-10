@@ -1,5 +1,6 @@
 import React, {useContext, useEffect} from 'react';
-import {View, StyleSheet, ScrollView} from 'react-native';
+import {View, StyleSheet, ScrollView, Alert} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {
   Text,
   Heading,
@@ -12,11 +13,12 @@ import {
   Avatar,
   VStack,
 } from 'native-base';
+
 import globalStyles from '../styles/global';
 import PedidosContext from '../context/pedidos/pedidosContext';
 
 const ResumenPedido = () => {
-  const {pedido, total, mostrarResumen} = useContext(PedidosContext);
+  const {pedido, total, mostrarResumen,eliminarProducto} = useContext(PedidosContext);
 
   useEffect(() => {
     calcularTotal();
@@ -30,32 +32,92 @@ const ResumenPedido = () => {
     );
     mostrarResumen(nuevoTotal);
   };
+  //Funcion para confirmar  y redireccioanr
+  const navigation = useNavigation();
+  const progresoPedido = () => {
+    Alert.alert(
+      'Revisa tu pedido',
+      'Una vez que realizas tu pedido,no podrás cambiarlo',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => {
+            navigation.navigate('ProgresoPedido');
+          },
+        },
+        {text: 'Revisar', style: 'cancel'},
+      ],
+    );
+  };
+  const confirmarEliminacion = id => {
+    Alert.alert(
+      '¿Esta seguro de elimianr el articulo?',
+      'Una vez eliminado no se puede recuperar',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => {
+            eliminarProducto(id);
+          },
+        },
+        {text: 'Cancelar', style: 'cancel'},
+      ],
+    );
+  };
+  
 
   return (
+    
+    
     <NativeBaseProvider style={globalStyles.contenedor}>
-      <ScrollView style={styles.scroll}>
-        <Heading style={globalStyles.titulo}>Resumen Pedido</Heading>
-        {pedido.map((platillo, i) => {
-          const {cantidad, nombre, imagen, id, precio} = platillo;
-          return (
-            <View style={styles.tarjeta}>
-              <HStack key={id + i} space={[4, 4]}>
-                <Box>
-                  <Avatar size="90px" source={{uri: imagen}}></Avatar>
-                </Box>
-                <VStack>
-                  <Text>{nombre} </Text>
-                  <Text>cantidad:{cantidad} </Text>
-                  <Text>Precio: $ {precio} </Text>
-                </VStack>
-              </HStack>
-            </View>
-          );
-        })}
-        <Text style={[globalStyles.cantidad, styles.titulo]}>
-          Total a Pagar: $ {total}
-        </Text>
+      
+      <ScrollView>
+        <View style={[styles.scroll, globalStyles.contenido]}>
+          <Heading style={globalStyles.titulo}>Resumen Pedido</Heading>
+          {pedido.map((platillo, i) => {
+            const {cantidad, nombre, imagen, id, precio} = platillo;
+            return (
+              <View key={id + i} style={styles.tarjeta}>
+                <HStack  space={[6, 3]}  >
+                  <Box>
+                    <Avatar size="115px" source={{uri: imagen}}></Avatar>
+                  </Box>
+                  <VStack>
+                    <Text>{nombre} </Text>
+                    <Text>cantidad:{cantidad} </Text>
+                    <Text>Precio: $ {precio} </Text>
+                    <Button
+                      size={'lg'}
+                      onPress={() => confirmarEliminacion(id)}
+                      style={{backgroundColor: 'red', marginTop: 10}}
+                      full
+                    >
+                      <Text style={{color: '#fff', paddingHorizontal: 70}}>
+                        Eliminar
+                      </Text>
+                    </Button>
+                  </VStack>
+                </HStack>
+              </View>
+            );
+          })}
+
+          <Text style={[globalStyles.cantidad, styles.titulo]}>
+            Total a Pagar: $ {total}
+          </Text>
+          <Button
+            style={styles.boton}
+            onPress={() => navigation.navigate('Menu')}
+          >
+            <Text style={styles.textob}>Seguir Pidiendo</Text>
+          </Button>
+        </View>
       </ScrollView>
+      <View>
+        <Button onPress={() => progresoPedido(id)} style={globalStyles.boton}>
+          <Text style={globalStyles.botonTexto}>Ordenar Pedido</Text>
+        </Button>
+      </View>
     </NativeBaseProvider>
   );
 };
@@ -73,6 +135,17 @@ const styles = StyleSheet.create({
   },
   scroll: {
     marginBottom: 40,
+  },
+  boton: {
+    backgroundColor: '#000',
+    marginTop: 20,
+  },
+  textob: {
+    color: '#fff',
+    textTransform: 'uppercase',
+  },
+  bteliminar: {
+    flex: 1,
   },
 });
 

@@ -13,6 +13,7 @@ import {
   Avatar,
   SectionList,
 } from 'native-base';
+
 import globalStyles from '../styles/global';
 
 const Menu = () => {
@@ -59,7 +60,6 @@ const Menu = () => {
                   justifyContent="space-between"
                 >
                   <Avatar size="80px" source={{uri: imagen}}></Avatar>
-
                   <VStack>
                     <Text
                       _dark={{color: 'warmGray.50'}}

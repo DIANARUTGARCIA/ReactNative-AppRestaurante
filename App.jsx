@@ -7,12 +7,14 @@ import DetallePlatillo from './views/DetallePlatillo';
 import FormularioPlatillo from './views/FormularioPlatillo';
 import ResumenPedido from './views/ResumenPedido';
 import ProgresoPedido from './views/ProgresoPedido';
-const Stack = createNativeStackNavigator();
+import BotonResumen from './components/BotonResumen';
 
 //importar state del context
 
 import FirebaseState from './context/firebase/firebaseState';
 import PedidoState from './context/pedidos/pedidosState';
+
+const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
@@ -43,6 +45,7 @@ const App = () => {
                 component={Menu}
                 options={{
                   title: 'Nuestro Menú',
+                  headerRight: props => <BotonResumen />,
                 }}
               />
 

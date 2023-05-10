@@ -19,7 +19,7 @@ const FormularioPlatillo = () => {
   const [total, setTotal] = useState(0);
 
   //context
-  const {platillo,guardarPedido} = useContext(PedidosContext);
+  const {platillo, guardarPedido} = useContext(PedidosContext);
   const {precio} = platillo;
   const navigation = useNavigation();
 
@@ -56,14 +56,14 @@ const FormularioPlatillo = () => {
           text: 'Confirmar',
           onPress: () => {
             //alamacenar el pedido
-            const pedido ={
+            const pedido = {
               ...platillo,
               cantidad,
               total,
-            }
-            guardarPedido(pedido)
+            };
+            guardarPedido(pedido);
             //navegar al resuemen del pedido
-            navigation.navigate('ResumenPedido')
+            navigation.navigate('ResumenPedido');
           },
         },
         {text: 'Cancelar', style: 'cancel'},
@@ -104,13 +104,11 @@ const FormularioPlatillo = () => {
         </Text>
       </View>
       <View style={styles.foo}>
-        
         <Button style={globalStyles.boton} onPress={() => confirmarOrden()}>
           <Text style={globalStyles.botonTexto}> Agregar al Pedido</Text>
         </Button>
       </View>
     </NativeBaseProvider>
-    
   );
 };
 

@@ -1,9 +1,25 @@
-import React from 'react'
-
+import React from 'react';
+import {View, StyleSheet, ScrollView} from 'react-native';
+import {
+  Text,
+  Heading,
+  HStack,
+  FormControl,
+  NativeBaseProvider,
+  Box,
+  Button,
+  Input,
+  Avatar,
+  VStack,
+} from 'native-base';
 const ProgresoPedido = () => {
   return (
-    <div>ProgresoPedido</div>
-  )
-}
+    <NativeBaseProvider>
+      <View>
+        <Text>Resumennj</Text>
+      </View>
+    </NativeBaseProvider>
+  );
+};
 
-export default ProgresoPedido
+export default ProgresoPedido;
