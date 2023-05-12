@@ -57,7 +57,7 @@ const Menu = () => {
               >
                 <HStack
                   space={[4, 3]} //espacio entre el avatar y el texto nombre
-                  justifyContent="space-between"
+                  // justifyContent="space-between"
                 >
                   <Avatar size="80px" source={{uri: imagen}}></Avatar>
                   <VStack>
@@ -70,21 +70,22 @@ const Menu = () => {
                       {nombre}
                     </Text>
 
-                    <Text color="coolGray.600" _dark={{color: 'warmGray.200'}}>
+                    <Text  color="coolGray.600" _dark={{color: 'warmGray.200'}}>
                       {descripcion}
                     </Text>
-                  </VStack>
-                  <Spacer />
+  
                   <Text
                     fontSize="xs"
-                    mr="3"
-                    mt="3"
+                    // mr="3"
+                    // mt="3"
                     _dark={{color: 'warmGray.50'}}
                     color="coolGray.800"
-                    alignSelf="flex-start"
+                    // alignSelf="flex-start"
                   >
                     ${precio}
                   </Text>
+                  </VStack>
+                  
                 </HStack>
               </Box>
             </Pressable>

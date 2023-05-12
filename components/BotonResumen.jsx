@@ -15,7 +15,7 @@ const BotonResumen = () => {
         onPress={() => navigation.navigate('ResumenPedido')}
         style={globalStyles.boton}
       >
-        <Text style={globalStyles.botonTexto}>Pedido</Text>
+        <Text style={globalStyles.botonTexto}>Ir a Pedido</Text>
       </Button>
     </NativeBaseProvider>
   );

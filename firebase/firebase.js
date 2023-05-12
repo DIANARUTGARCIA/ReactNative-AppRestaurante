@@ -7,7 +7,7 @@ class Firebase {
   constructor() {
     if (!app.apps.length) {
       app.initializeApp(firebaseConfig);
-      app.firestore().settings({experimentalForceLongPolling: true});
+      // app.firestore().settings({experimentalForceLongPolling: true});
     }
 
     this.db = app.firestore();
